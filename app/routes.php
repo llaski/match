@@ -19,3 +19,20 @@ Route::get('/', function()
 Route::get('/info', function(){
     phpinfo();
 });
+
+Route::get('/login', [
+    'as' => 'user/login',
+    'uses' => 'UserController@loginGet'
+]);
+
+Route::post('/login', [
+    'as' => 'user/login',
+    'uses' => 'UserController@loginPost'
+]);
+
+Route::get('/profile', [
+    'as' => 'user/profile',
+    'uses' => 'UserController@userProfileGet'
+]);
+
+Route::any('/backbone', 'BackboneController@index');
