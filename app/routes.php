@@ -35,4 +35,10 @@ Route::get('/profile', [
     'uses' => 'UserController@userProfileGet'
 ]);
 
-Route::any('/backbone', 'BackboneController@index');
+Route::group(array('prefix' => '/backbone'), function() {
+
+    Route::any('/', 'BackboneController@index');
+
+    Route::resource('tasks', 'TasksController');
+    Route::resource('contacts', 'ContactsController');
+});
