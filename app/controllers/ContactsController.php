@@ -29,7 +29,7 @@ class ContactsController extends \BaseController {
 	 */
 	public function store()
 	{
-		Contact::create([
+		return Contact::create([
 			'first_name' => Input::get('first_name'),
 			'last_name' => Input::get('last_name'),
 			'email' => Input::get('email'),
@@ -85,7 +85,7 @@ class ContactsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		return Contact::find($id)->delete();
+		return Contact::find($id)->delete() ? Response::json(['msg' => 'OK']) : Response::json(['msg' => 'NOT OK']);
 	}
 
 }

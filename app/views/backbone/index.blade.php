@@ -4,8 +4,17 @@
         <meta charset="utf-8">
         <title>Backbone</title>
 
+        <style>
+            form {
+                margin-bottom: 32px;
+            }
 
+            .module {
+                margin: 20px 0;
+            }
+        </style>
 
+        <!--<script src="/js/backbone/require.js" data-main="/js/backbone/main"></script>-->
     </head>
     <body>
         <!-- <script id="personTemplate" type="text/template">
@@ -26,7 +35,7 @@
 
         <h1>Contacts</h1>
 
-        <form id="addContact">
+        <form id="addContact" class="module" class="module">
             <div>
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" />
@@ -47,10 +56,60 @@
                 <input type="submit" valye="Add Contact">
             </div>
         </form>
+
+        <table id="allContacts" class="module">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+        </table>
+
+        <script id="allContactsTemplate" type="text/template">
+            <td><%= first_name %></td>
+            <td><%= last_name %></td>
+            <td><%= email %></td>
+            <td><%= description %></td>
+            <td><a href="#contacts/<%= id %>/edit" class="edit">Edit</a></td>
+            <td><a href="#contacts/<%= id %>" class="delete">Delete</a></td>
+        </script>
+
+        <div id="editContactSection" class="module">
+
+        </div>
+        <script id="editContactTemplate" type="text/template">
+            <h2>Edit Contact: <%= first_name %> <%= last_name %></h2>
+            <form id="editContact">
+                <div>
+                    <label for="edit_first_name">First Name:</label>
+                    <input type="text" id="edit_first_name" name="edit_first_name" value="<%= first_name %>" />
+                </div>
+                <div>
+                    <label for="edit_last_name">Last Name:</label>
+                    <input type="text" id="edit_last_name" name="edit_last_name" value="<%= last_name %>" />
+                </div>
+                <div>
+                    <label for="edit_email">Email Address:</label>
+                    <input type="text" id="edit_email" name="edit_email" value="<%= email %>" />
+                </div>
+                <div>
+                    <label for="edit_description">Description:</label>
+                    <textarea name="edit_description" id="edit_description"><%= description %></textarea>
+                </div>
+                <div>
+                    <input type="submit" valye="Edit Contact">
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </script>
+
         <script src="/js/backbone/underscore.js"></script>
-        <script src="/js/backbone/jquery.js"></script>
+        <script src="/js/backbone/libs/jquery.js"></script>
         <script src="/js/backbone/backbone.js"></script>
-        <script src="/js/backbone/main.js"></script>
+        <script src="/js/backbone/app.js"></script>
         <script src="/js/backbone/models.js"></script>
         <script src="/js/backbone/collections.js"></script>
         <script src="/js/backbone/views.js"></script>
@@ -60,7 +119,9 @@
             new App.Router;
             Backbone.history.start();
 
-            App.contacts = new App.Collections.Contacts;
+            App.contacts = new App.Collections.Contacts();
+            App.contacts.sort();
+
             App.contacts.fetch().then(function(){
                 new App.Views.App({
                     collection: App.contacts

@@ -326,6 +326,7 @@
     }).sort(function(left, right) {
       var a = left.criteria;
       var b = right.criteria;
+
       if (a !== b) {
         if (a > b || a === void 0) return 1;
         if (a < b || b === void 0) return -1;
