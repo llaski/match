@@ -16,6 +16,11 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::get('/home', function()
+{
+    return 'Home Page';
+});
+
 Route::get('/info', function(){
     phpinfo();
 });
@@ -41,4 +46,11 @@ Route::group(array('prefix' => '/backbone'), function() {
 
     Route::resource('tasks', 'TasksController');
     Route::resource('contacts', 'ContactsController');
+});
+
+Route::group(array('prefix' => '/chat'), function() {
+
+    Route::any('/', function(){
+        return View::make('chat.index');
+    });
 });
