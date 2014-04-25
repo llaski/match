@@ -48,7 +48,14 @@ Route::group(array('prefix' => '/backbone'), function() {
     Route::resource('contacts', 'ContactsController');
 });
 
-Route::group(array('prefix' => '/chat'), function() {
+Route::group(array('prefix' => '/advanced-backbone'), function() {
+
+    Route::any('/', 'BackboneController@advancedIndex');
+    Route::get('/docs', 'BackboneController@advancedDocuments');
+    Route::get('/notes', 'BackboneController@advancedNotes');
+});
+
+Route::group(array('prefix' => '/chat'), function(){
 
     Route::any('/', function(){
         return View::make('chat.index');
