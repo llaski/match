@@ -55,6 +55,12 @@ Route::group(array('prefix' => '/advanced-backbone'), function() {
     Route::get('/notes', 'BackboneController@advancedNotes');
 });
 
+Route::group(array('prefix' => '/angular'), function() {
+
+    Route::any('/', 'AngularController@index');
+    Route::any('/contacts', 'AngularController@contacts');
+});
+
 Route::group(array('prefix' => '/chat'), function(){
 
     Route::any('/', function(){
