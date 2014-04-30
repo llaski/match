@@ -13,14 +13,6 @@ require.config({
     }
 });
 
-// require(['models/slide', 'views/slide'], function(SlideModel, slideView) {
-//     var slide = new SlideModel({
-//         title : "First Slide"
-//     });
-
-//     var slideView = new slideView({
-//         model: slide
-//     });
-
-//     console.log(slideView.render().el);
-// });
+require(['views/app'], function(App) {
+    window.App = new App();
+});
