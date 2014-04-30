@@ -1,0 +1,23 @@
+@import 'compass';
+@import '../bower_components/normalize-scss/_normalize';
+
+* {
+    @include box-sizing(border-box);
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    text-align: center;
+    color: #292929;
+    @include background-image(radial-gradient(#fff 0%, #e66d1a 100%));
+}
+
+h1, h2, h3, h4, h5 {
+    margin-top: 0;
+}
+
+@import 'slides';
