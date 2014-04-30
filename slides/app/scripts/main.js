@@ -13,6 +13,14 @@ require.config({
     }
 });
 
-require(['backbone'], function (Backbone) {
-    console.log(Backbone);
-});
+// require(['models/slide', 'views/slide'], function(SlideModel, slideView) {
+//     var slide = new SlideModel({
+//         title : "First Slide"
+//     });
+
+//     var slideView = new slideView({
+//         model: slide
+//     });
+
+//     console.log(slideView.render().el);
+// });
