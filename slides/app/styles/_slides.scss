@@ -15,5 +15,26 @@
         line-height: 1.3em;
         letter-spacing: -1px;
         margin-bottom: -1px;
+
+        &.normal {
+            font-size: 100px;
+        }
+
+        &.large {
+            font-size: 40px;
+        }
+
+        &.x-large {
+            text-align: left;
+            font-size: 25px;
+        }
+
+
+    }
+
+    &.image img {
+        max-width: 100%;
+        border: 1px solid #666;
+        padding: 2px;
     }
 }
