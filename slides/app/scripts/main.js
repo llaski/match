@@ -9,11 +9,12 @@ require.config({
     paths: {
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
-        jquery: '../bower_components/jquery/dist/jquery'
+        jquery: '../bower_components/jquery/dist/jquery',
+        prettify: '../bower_components/google-code-prettify/src/prettify',
     }
 });
 
-require(['views/app'], function(AppView) {
+require(['views/app', 'prettify'], function(AppView) {
     window.App = {
         Vent : _.extend({}, Backbone.Events)
     };

@@ -5,7 +5,8 @@
     "jquery": "~2.1.0",
     "backbone": "~1.1.2",
     "requirejs": "~2.1.11",
-    "normalize-scss": "~3.0.1"
+    "normalize-scss": "~3.0.1",
+    "google-code-prettify": "~1.0.1"
   },
   "devDependencies": {}
 }
