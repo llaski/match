@@ -51,8 +51,14 @@ Route::group(array('prefix' => '/backbone'), function() {
 Route::group(array('prefix' => '/advanced-backbone'), function() {
 
     Route::any('/', 'BackboneController@advancedIndex');
-    Route::get('/docs', 'BackboneController@advancedDocuments');
-    Route::get('/notes', 'BackboneController@advancedNotes');
+    Route::get('/documents', 'BackboneController@advancedDocuments');
+    Route::post('/documents', 'BackboneController@postAdvancedDocuments');
+    Route::get('/documents/{id}', 'BackboneController@getAdvancedDocument')->where('id', '[0-9]+');
+    Route::put('/documents/{id}', 'BackboneController@putAdvancedDocument')->where('id', '[0-9]+');
+
+    Route::get('/documents/{id}/notes', 'BackboneController@advancedNotes')->where('id', '[0-9]+');
+    Route::post('/documents/{id}/notes', 'BackboneController@postAdvancedNotes')->where('id', '[0-9]+');
+    Route::put('/documents/{id}/notes/{note_id}', 'BackboneController@putAdvancedNotes')->where('id', '[0-9]+')->where('note_id', '[0-9]+');
 });
 
 Route::group(array('prefix' => '/angular'), function() {

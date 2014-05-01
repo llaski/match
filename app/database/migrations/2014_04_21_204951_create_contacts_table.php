@@ -31,7 +31,7 @@ class CreateContactsTable extends Migration {
 	{
 		Schema::table('contacts', function(Blueprint $table)
 		{
-			Schma::dropIfExsts('contacts');
+			Schema::dropIfExsts('contacts');
 		});
 	}
 
