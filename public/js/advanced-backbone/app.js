@@ -1,5 +1,5 @@
 //Validation
-/*var User = Backbone.Model.extend({
+var User = Backbone.Model.extend({
     defaults: {
         name : "",
         age : 0
@@ -8,7 +8,9 @@
         if (attrs.age < 0)
             return 'Age must be 0 or greater.';
     }
-});*/
+});
+
+var user = new User({ age : -3}, { validate: true} );
 String.prototype.wordCount = function() {
     var count = 0;
     for (var i = 0; i <= this.length; i++) {
@@ -141,7 +143,8 @@ var DocumentsView = Backbone.View.extend({
 });
 
 // var documents = new DocumentsView();
-
+// var collection = new DocumentsCollection();
+// console.log('test');
 // var documentsView = new DocumentsView({ collection : new DocumentsCollection });
 // $("#main").append(documentsView.render().el);
 
@@ -248,32 +251,75 @@ $(function(){
     var Genders = new Backbone.Collection([{ name : 'Female', id : 1}, { name : "Male", id : 0}]);
     var people = new UI.People;
 
-    people.add({ name : "L Train", gender : Genders.get(0), birthday: new Date(1990, 5, 15), married: false });
+    people.add({ name : "L Train", gender : Genders.get(0), birthday: new Date(1990, 5, 15), married: true });
     people.add({ name : "A Train", gender : Genders.get(1), birthday: new Date(1991, 5, 15), married: false });
-    people.add({ name : "B Train", gender : Genders.get(0), birthday: new Date(1992, 5, 15), married: false });
+    people.add({ name : "B Train", gender : Genders.get(0), birthday: new Date(1992, 5, 15), married: true });
     people.add({ name : "C Train", gender : Genders.get(1), birthday: new Date(1993, 5, 15), married: false });
-    people.add({ name : "F Train", gender : Genders.get(0), birthday: new Date(1994, 5, 15), married: false });
+    people.add({ name : "F Train", gender : Genders.get(0), birthday: new Date(1994, 5, 15), married: true });
 
+    var person = new UI.Person({ name : "L Train", gender : Genders.get(0), birthday: new Date(1990, 5, 15), married: false });
 
+    // UI.TableView = Backbone.UI.TableView.extend({
+    //     initialize: function(options) {
+    //         this.options = options;
+    //     }
+    // });
 
     var table = new Backbone.UI.TableView({
-        collection: people,
-            columns : [
-                { title : 'Name', content : 'name' },
-                { title : 'Gender', content : 'gender' },
-                { title : 'Birthday', content : 'birthday' },
-                { title : 'Married', content : 'married' }
-            ]
+        model: people,
+        columns : [
+            { title : 'Name', content : 'name' },
+            { title : 'Gender', content : 'gender', format: function(model) { return model.get('name'); } },
+            { title : 'Birthday', content : 'birthday', format: function(date) { return date.toString(); } },
+            { title : 'Married', content : 'married', format: function(married) { return married ? 'yes' : 'no'; } }
+        ]
     });
 
-    console.log(table);
-    var AppView = Backbone.View.extend({
-        el : '#main',
+    var train = people.models[3];
+
+    var textbox = new Backbone.UI.TextField({
+        model: train,
+        content: 'name'
+    }).render();
+
+    // var AppView = Backbone.View.extend({
+    //     el : '#main',
+
+    //     render: function() {
+    //         this.$el.append(table.render().el);
+    //         this.$el.append(textbox.el);
+    //     }
+    // });
+
+    // new AppView().render();
+    //
+    //
+    //Stickit
+
+});
+
+var Product = Backbone.Model.extend({});
+    var ProductView = Backbone.View.extend({
+        template : _.template('<h1 id="name"></h1><p id="price"></p>'),
+        bindings: {
+            '#name' : 'name' ,
+            "#price" : {
+                observe : 'price',
+                onGet: function(val) {
+                    return '$' + val.toFixed(2);
+                }
+            }
+        },
 
         render: function() {
-            this.$el.append(table.render().el);
+            this.$el.html(this.template);
+            this.stickit();
+            return this;
         }
     });
-
-    new AppView().render();
-});
+    // var product = new Product({
+    //     name : 'tv',
+    //     price : 2000
+    // });
+    // var productView = new ProductView({ model : product });
+    // $("#main").append(productView.render().el);

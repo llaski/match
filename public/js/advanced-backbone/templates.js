@@ -20,3 +20,6 @@ for (var temp in Templates) {
     if (Templates.hasOwnProperty(temp))
         Templates[temp] = _.template(Templates[temp]);
 }
+
+
+//Rendering Server Side

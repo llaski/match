@@ -2296,15 +2296,16 @@ if(window.jQuery) {
       onSort : null
     },
 
-    initialize : function() {
+    initialize : function(options) {
       Backbone.UI.CollectionView.prototype.initialize.call(this, arguments);
       $(this.el).addClass('table_view');
       this._sortState = {reverse : true};
+      this.options = _.extend({}, this.options, options); //Custom
     },
 
     render : function() {
       $(this.el).empty();
-      console.log(this.options.columns);
+
       this.itemViews = {};
 
       var table;
@@ -2416,10 +2417,12 @@ if(window.jQuery) {
         var width = !!column.width ? parseInt(column.width, 10) + 5 : null;
         var style = width ? 'width:' + width + 'px; max-width:' + width + 'px': null;
         var content = this.resolveContent(model, column.content);
+        var format = !!column.format ? column.format : function(val) { return val; };
+
         row.appendChild($.el.td({
           className : _(list).nameForIndex(index),
           style : style
-        }, $.el.div({className : 'wrapper', style : style}, content)));
+        }, $.el.div({className : 'wrapper', style : style}, format(content))));
       }, this);
 
       // bind the item click callback if given
